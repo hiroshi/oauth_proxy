@@ -29,7 +29,7 @@ class OAuthProxy < Sinatra::Base
   SECRETS = ENV['SECRETS'].split(/\s+/).inject({}) do |h, e|
     site, key, secret = e.split(/:/)
     h.merge(site => {:key => key, :secret => secret})
-  end
+  end rescue {}
 
   def consumer(site)
     OAuth::Consumer.new(SECRETS[site][:key], SECRETS[site][:secret], PROVIDERS[site][:consumer_options])
