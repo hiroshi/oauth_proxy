@@ -1,0 +1,10 @@
+twitter:
+  oauth_version: 1
+  consumer_options:
+    site: "http://twitter.com/"
+github:
+  oauth_version: 2
+  client_options:
+    site: "https://api.github.com/"
+    authorize_url: "https://github.com/login/oauth/authorize"
+    token_url: "https://github.com/login/oauth/access_token"
