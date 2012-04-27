@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <title>OAuth Proxy Sample</title>
+    <meta name="viewport" content="user-scalable=no, width=device-width" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="http://oauth-proxy.herokuapp.com/oauth_proxy.js"></script>
+  </head>
+  <body>
+
+    <p>You can use OAuthProxy anywhere even in local file system. Try to download this html and open in your local machine.</p>
+
+    <div>
+      <a id="twitter_login">Login via Twitter</a>
+      -&gt;
+      <a id="get_screen_name" href="http://api.twitter.com/1/account/verify_credentials.json">Get screen name</a> :
+      <span id="screen_name"></span>
+    </div>
+    <div>
+      <a id="github_login">Login via GitHub</a>
+      -&gt;
+      <a id="get_user_login" href="https://api.github.com/user">Get user login</a> :
+      <span id="user_login"></span>
+    </div>
+
+    <script type="text/javascript">
+      var twitterProxy = OAuthProxy("twitter", {loginSelector: "#twitter_login"});
+      $("#get_screen_name").click(function(e) {
+        twitterProxy.get($(this).attr("href"), function(data) {
+          $("#screen_name").html(data.screen_name);
+        });
+        return false;
+      });
+
+      var githubProxy = OAuthProxy("github", {loginSelector: "#github_login"});
+      $("#get_user_login").click(function(e) {
+        githubProxy.get($(this).attr("href"), function(data) {
+          $("#user_login").html(data.location);
+        });
+        return false;
+      });
+    </script>
+  </body>
+</html>
